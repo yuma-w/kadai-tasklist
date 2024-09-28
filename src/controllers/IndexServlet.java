@@ -35,9 +35,26 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Message> tasks = em.createNamedQuery("getAlltasks", Message.class).getResultList();
+        // 開くページ数を取得（デフォルトは1ページ目）
+        int page = 1;
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch(NumberFormatException e) {}
+
+
+        List<Message> tasks = em.createNamedQuery("getAlltasks", Message.class)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
+                .getResultList();
+
+        long tasks_count = (long)em.createNamedQuery("gettasksCount", Long.class)
+                .getSingleResult();
 
         em.close();
+
+        request.setAttribute("tasks", tasks);
+        request.setAttribute("tasks_count", tasks_count);     // 全件数
+        request.setAttribute("page", page);                         // ページ数
 
         request.setAttribute("tasks", tasks);
 
