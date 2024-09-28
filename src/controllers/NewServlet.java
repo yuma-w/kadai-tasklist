@@ -41,30 +41,5 @@ public class NewServlet extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/messages/new.jsp");
         rd.forward(request, response);
-
-
-        // EntityManager em = DBUtil.createEntityManager();
-       // em.getTransaction().begin();
-
-        // Messageのインスタンスを生成
-       // Message m = new Message();
-
-        // mの各フィールドにデータを代入
-
-       // String content = "hello";
-       // m.setContent(content);
-
-      //  Timestamp currentTime = new Timestamp(System.currentTimeMillis());     // 現在の日時を取得
-      //  m.setCreated_at(currentTime);
-      //  m.setUpdated_at(currentTime);
-
-        // データベースに保存
-      //  em.persist(m);
-     //   em.getTransaction().commit();
-
-        // 自動採番されたIDの値を表示
-      //  response.getWriter().append(Integer.valueOf(m.getId()).toString());
-
-      //  em.close();
      }
 }
